@@ -262,7 +262,7 @@ export default class M3U8Parser {
 
           if (decryptmethod) {
             levelkey = new LevelKey(baseurl, decrypturi);
-            if ((decrypturi) && (['AES-128', 'SAMPLE-AES', 'SAMPLE-AES-CENC'].indexOf(decryptmethod) >= 0)) {
+            if ((decrypturi) && (['AES-128', 'SAMPLE-AES', 'SAMPLE-AES-CENC', 'AES-128-ECB'].indexOf(decryptmethod) >= 0)) {
               levelkey.method = decryptmethod;
               levelkey.key = null;
               // Initialization Vector (IV)

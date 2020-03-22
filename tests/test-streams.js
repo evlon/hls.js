@@ -36,7 +36,7 @@ function createTestStreamWithConfig (target, config) {
 
 module.exports = {
   bbb: createTestStreamWithConfig({
-    url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+    url: 'https://cdn.jsdelivr.net/gh/cdndb/cto-10422/179236/debug.ecb.m3u8',
     description: 'Big Buck Bunny - adaptive qualities'
   },
   {

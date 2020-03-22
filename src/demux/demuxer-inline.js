@@ -46,14 +46,14 @@ class DemuxerInline {
   }
 
   push (data, decryptdata, initSegment, audioCodec, videoCodec, timeOffset, discontinuity, trackSwitch, contiguous, duration, accurateTimeOffset, defaultInitPTS) {
-    if ((data.byteLength > 0) && (decryptdata != null) && (decryptdata.key != null) && (decryptdata.method === 'AES-128')) {
+    if ((data.byteLength > 0) && (decryptdata != null) && (decryptdata.key != null) && (decryptdata.method === 'AES-128' || decryptdata.method === 'AES-128-ECB')) {
       let decrypter = this.decrypter;
       if (decrypter == null) {
         decrypter = this.decrypter = new Decrypter(this.observer, this.config);
       }
 
       const startTime = now();
-      decrypter.decrypt(data, decryptdata.key.buffer, decryptdata.iv.buffer, (decryptedData) => {
+      decrypter.decrypt(decryptdata.method, data, decryptdata.key.buffer, decryptdata.iv.buffer, (decryptedData) => {
         const endTime = now();
         this.observer.trigger(Event.FRAG_DECRYPTED, { stats: { tstart: startTime, tdecrypt: endTime } });
         this.pushDecrypted(new Uint8Array(decryptedData), decryptdata, new Uint8Array(initSegment), audioCodec, videoCodec, timeOffset, discontinuity, trackSwitch, contiguous, duration, accurateTimeOffset, defaultInitPTS);

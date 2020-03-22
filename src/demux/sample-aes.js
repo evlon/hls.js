@@ -12,7 +12,7 @@ class SampleAesDecrypter {
   }
 
   decryptBuffer (encryptedData, callback) {
-    this.decrypter.decrypt(encryptedData, this.decryptdata.key.buffer, this.decryptdata.iv.buffer, callback);
+    this.decrypter.decrypt('AES-128', encryptedData, this.decryptdata.key.buffer, this.decryptdata.iv.buffer, callback);
   }
 
   // AAC - encrypt all full 16 bytes blocks starting from offset 16
